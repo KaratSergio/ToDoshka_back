@@ -15,6 +15,12 @@ import googleRedirect from "../controllers/auth/googleRedirect.js";
 import upload from "../middlewares/upload.js";
 import isAuthorized from "../middlewares/isAuthorized.js";
 
+import authSchemas from "../schemas/schemaAuth.js";
+
+import validateBody from "../decorators/validateBody.js";
+
+const { registerSchema } = authSchemas;
+
 const routerAuth = express.Router();
 
 routerAuth.get("/google", googleAuth);
@@ -23,7 +29,7 @@ routerAuth.get("/google-redirect", googleRedirect);
 
 routerAuth.get("/current", isAuthorized, currentUser);
 
-routerAuth.post("/register", register);
+routerAuth.post("/register", validateBody(registerSchema), register);
 
 routerAuth.post("/login", login);
 
