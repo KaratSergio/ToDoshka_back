@@ -5,7 +5,47 @@ import handleMongooseError from "../helpers/handleMongooseError.js";
 import { email, password } from "../constants/regExp.js";
 
 const userSchema = new Schema(
-// write the code here
+  {
+    name: {
+      type: String,
+      minlength: 2,
+      required: true,
+    },
+    password: {
+      type: String,
+      match: password,
+      minlength: 8,
+      required: [true, "Password is required"],
+    },
+    email: {
+      type: String,
+      match: email,
+      required: [true, "Email is required"],
+      unique: true,
+    },
+    theme: {
+      type: String,
+      enum: ["dark", "light", "violet"],
+      default: "dark",
+    },
+    token: {
+      type: String,
+      default: "",
+    },
+    avatarURL: {
+      type: String,
+      required: true,
+    },
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+    verificationToken: {
+      type: String,
+      default: "",
+    },
+  },
+  { version: false, timestamps: true }
 );
 
 userSchema.post("save", handleMongooseError);
