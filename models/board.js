@@ -2,9 +2,7 @@ import { Schema, model } from "mongoose";
 
 import handleMongooseError from "../helpers/handleMongooseError.js";
 
-const boardSchema = new Schema(
-// write the code here
-);
+const boardSchema = new Schema();
 
 boardSchema.post("save", handleMongooseError);
 
