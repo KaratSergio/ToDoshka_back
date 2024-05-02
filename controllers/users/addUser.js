@@ -1,4 +1,5 @@
 import BadRequestError from "../../helpers/BadRequestError.js";
+import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 import HttpError from "../../helpers/HttpError.js";
 
 import boardSchemas from "../../schemas/schemaBoard.js";
@@ -18,7 +19,7 @@ const addUser = async (req, res) => {
   if (!user) throw HttpError(400, "User does not exist");
 
   const board = await Board.findById(id);
-  if (board.owner.includes(user._id)) {
+  if (board.owners.includes(user._id)) {
     throw HttpError(
       409,
       `User ${user.email} is already working with board ${id}`
@@ -30,4 +31,4 @@ const addUser = async (req, res) => {
   });
 };
 
-export default addUser;
+export default ctrlWrapper(addUser);

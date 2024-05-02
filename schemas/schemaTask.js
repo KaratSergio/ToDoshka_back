@@ -13,7 +13,6 @@ const addTaskSchema = Joi.object({
 
 // column: Joi.string().required(),
 
-
 const editTaskSchema = Joi.object({
   title: Joi.string(),
   description: Joi.string(),

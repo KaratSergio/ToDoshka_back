@@ -2,6 +2,8 @@ import User from "../../models/user.js";
 
 import authSchema from "../../schemas/schemaAuth.js";
 
+import ctrlWrapper from "../../decorators/ctrlWrapper.js";
+
 import BadRequestError from "../../helpers/BadRequestError.js";
 
 import { hashPasswordMiddleware } from "../../helpers/hashPassword.js";
@@ -49,4 +51,4 @@ const updateUser = async (req, res, next) => {
   }
 };
 
-export default updateUser;
+export default ctrlWrapper(updateUser);

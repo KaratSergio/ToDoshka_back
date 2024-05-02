@@ -21,7 +21,7 @@ const boardSchema = new Schema(
       enum: backgrounds,
       default: "",
     },
-    owner: {
+    owners: {
       type: Schema.Types.ObjectId,
       ref: "user",
     },
