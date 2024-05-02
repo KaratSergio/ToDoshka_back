@@ -2,33 +2,7 @@ import { Schema, model } from "mongoose";
 
 import handleMongooseError from "../helpers/handleMongooseError.js";
 
-const icons = [
-  "icon-project",
-  "icon-star",
-  "icon-loading",
-  "icon-puzzle",
-  "icon-container",
-  "icon-lightning",
-  "icon-colors",
-  "icon-hexagon",
-];
-
-const backgroundBoard = [
-  "air",
-  "ballons",
-  "canyon",
-  "circle",
-  "clouds",
-  "magnolia",
-  "milkyway",
-  "moon",
-  "night",
-  "palm",
-  "rocks",
-  "sea",
-  "tree",
-  "yacht",
-];
+import { icons, backgrounds } from "../constants/uiConstants.js";
 
 const boardSchema = new Schema(
   {
@@ -38,13 +12,13 @@ const boardSchema = new Schema(
     },
     icon: {
       type: String,
-      enum: [icons],
+      enum: icons,
       default: "icon-project",
       required: [true, "set id for icon"],
     },
     background: {
       type: String,
-      enum: [backgroundBoard],
+      enum: backgrounds,
       default: "",
     },
     owner: {

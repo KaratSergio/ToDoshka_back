@@ -5,6 +5,8 @@ import setUpdateSetting from "../helpers/setUpdateSetting.js";
 
 import { email, password } from "../constants/regExp.js";
 
+import { themes } from "../constants/uiConstants.js";
+
 const userSchema = new Schema(
   {
     name: {
@@ -26,7 +28,7 @@ const userSchema = new Schema(
     },
     theme: {
       type: String,
-      enum: ["dark", "light", "violet"],
+      enum: themes,
       default: "dark",
     },
     token: {

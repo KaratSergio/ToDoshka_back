@@ -1,11 +1,14 @@
 import HttpError from "./HttpError.js";
 
-const BadRequestError = (error, req, res, next) => {
+const BadRequestError = (req, res, next) => {
+  const { error } = req.bodyValidation;
   if (error) {
     const errorMessage = error.details
       .map((detail) => detail.message)
       .join(",  ");
-    throw new HttpError(400, errorMessage);
+    next(new HttpError(400, errorMessage));
+  } else {
+    next();
   }
 };
 

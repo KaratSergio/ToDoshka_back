@@ -2,6 +2,8 @@ import { Schema, model } from "mongoose";
 
 import handleMongooseError from "../helpers/handleMongooseError.js";
 
+import { priorities } from "../constants/uiConstants.js";
+
 const taskSchema = new Schema(
   {
     title: {
@@ -14,7 +16,7 @@ const taskSchema = new Schema(
     },
     priority: {
       type: String,
-      enum: ["Without priority", "Low", "Medium", "High"],
+      enum: priorities,
       required: [true, "Set priority for task"],
       default: "Without priority",
     },

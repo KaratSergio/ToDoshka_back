@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import ctrlWrapper from "../../decorators/ctrlWrapper.js";
+// import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 
 import * as servicesAuth from "../../services/servicesAuth.js";
 
