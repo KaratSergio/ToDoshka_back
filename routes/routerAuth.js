@@ -19,7 +19,7 @@ import authSchemas from "../schemas/schemaAuth.js";
 
 import validateBody from "../decorators/validateBody.js";
 
-const { registerSchema } = authSchemas;
+const { registerSchema, loginSchema } = authSchemas;
 
 const routerAuth = express.Router();
 
@@ -31,7 +31,7 @@ routerAuth.get("/current", isAuthorized, currentUser);
 
 routerAuth.post("/register", validateBody(registerSchema), register);
 
-routerAuth.post("/login", login);
+routerAuth.post("/login", validateBody(loginSchema), login);
 
 routerAuth.post("/logout", isAuthorized, logout);
 
