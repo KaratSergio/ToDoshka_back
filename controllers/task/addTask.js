@@ -3,14 +3,14 @@ import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 import Task from "../../models/task.js";
 import Column from "../../models/column.js";
 
-// додавання (створення) картки
 const addTask = ctrlWrapper(async (req, res) => {
+ 
   const { _id: owner } = req.user;
-  const { column, title, description, priority, deadline } = req.body;
+  const { column } = req.body;
 
-  const newTask = await Task.create({title, description, priority, deadline, owner});
+  const newTask = await Task.create({...req.body, owner});
   if (!newTask) {
-    throw HttpError(404, `not found`);
+    throw HttpError(404, "Not found");
   }
 
   await Column.findByIdAndUpdate(
@@ -29,25 +29,8 @@ const addTask = ctrlWrapper(async (req, res) => {
     deadline: newTask.deadline,
     updatedAt: newTask.updatedAt,
   });
+
 });
 
 export default addTask;
 
-//1. ств
-
-// // Приклади IVETTA
-// // $push
-// data = await Diary.findByIdAndUpdate(
-//     foundedDiary._id,
-//     {
-//       $push: { doneExercises: { exercise, time, calories } },
-//     },
-//     { new: true }
-//   )
-//  // $pull
-//  data = await Diary.findByIdAndUpdate(
-//        foundedDiary._id,
-//        {
-//          $pull: { doneExercises: { _id: doneExerciseId } },
-//        },
-//        { new: true })

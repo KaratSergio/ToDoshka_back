@@ -17,7 +17,7 @@ const routerTasks = express.Router();
 
 routerTasks.post("/", isAuthorized, validateBody(taskSchemas.addTaskSchema), addTask);
 
-routerTasks.put("/:id", isAuthorized, isValidId, updateTask);
+routerTasks.put("/:id", isAuthorized, isValidId, validateBody(taskSchemas.editTaskSchema), updateTask);
 
 routerTasks.delete("/:id", isAuthorized, isValidId, deleteTask);
 
