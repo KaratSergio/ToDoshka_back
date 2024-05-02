@@ -7,6 +7,7 @@ import routerAuth from "./routes/routerAuth.js";
 import routerTasks from "./routes/routerTasks.js";
 import routerBoards from "./routes/routerBoards.js";
 import routerColumns from "./routes/routerColumns.js";
+import routerEmail from "./routes/routerEmail.js";
 
 export const app = express();
 
@@ -19,6 +20,7 @@ app.use("/api/users", routerAuth);
 app.use("/api/tasks", routerTasks);
 app.use("/api/boards", routerBoards);
 app.use("/api/columns", routerColumns);
+app.use("/api/help", routerEmail);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Route Not Found" });
