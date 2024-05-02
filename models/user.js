@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
 
 import handleMongooseError from "../helpers/handleMongooseError.js";
+import setUpdateSetting from "../helpers/setUpdateSetting.js";
 
 import { email, password } from "../constants/regExp.js";
 
@@ -34,7 +35,6 @@ const userSchema = new Schema(
     },
     avatarURL: {
       type: String,
-      required: true,
     },
     verify: {
       type: Boolean,
@@ -49,6 +49,10 @@ const userSchema = new Schema(
 );
 
 userSchema.post("save", handleMongooseError);
+
+userSchema.pre("findOneAndUpdate", setUpdateSetting);
+
+userSchema.post("findOneAndUpdate", handleMongooseError);
 
 const User = model("user", userSchema);
 
