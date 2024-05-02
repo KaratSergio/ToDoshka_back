@@ -13,15 +13,15 @@ const taskSchema = new Schema({
   },
   priority: {
     type: String,
-    enum: ["without", "low", "medium", "high"],
+    enum: ["Without priority", "Low", "Medium", "High"],
     required: [true, "Set priority for task"],
-    default: "without",
+    default: "Without priority",
   },
   deadline: {
     type: Date,
     default: Date.now,
   },
-  user: {
+  owner: {
     type: Schema.Types.ObjectId,
     ref: 'user',
     required: 'true'
@@ -31,7 +31,7 @@ const taskSchema = new Schema({
     ref: 'column',
     required: 'true'
 },
-},   { versionKey: false, timestamps: true }
+}, { versionKey: false, timestamps: true }
 );
 
 taskSchema.post("save", handleMongooseError);

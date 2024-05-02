@@ -47,6 +47,10 @@ const boardSchema = new Schema(
       enum: [backgroundBoard],
       default: "",
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+    },
   },
   { versionKey: false, timestamps: true }
 );
