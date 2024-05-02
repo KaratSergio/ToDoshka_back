@@ -8,7 +8,7 @@ const columnSchema = new Schema(
       type: String,
       required: [true, "Set title for column"],
     },
-    user: {
+    owner: {
       type: Schema.Types.ObjectId,
       ref: "user",
       required: "true",
