@@ -1,13 +1,12 @@
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 
-// import ctrlWrapper from "../../decorators/ctrlWrapper.js";
+//import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 
 import * as servicesAuth from "../../services/servicesAuth.js";
 
 import HttpError from "../../helpers/HttpError.js";
 
-const { JWT_SECRET } = process.env;
+import { generateToken } from "../../helpers/tokenAuth.js";
 
 const register = async (req, res) => {
   const { name, email, password } = req.body;
@@ -30,7 +29,7 @@ const register = async (req, res) => {
     id,
   };
 
-  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
+  const token = generateToken(payload);
 
   if (!newUser) {
     throw HttpError(404, "Not found");
