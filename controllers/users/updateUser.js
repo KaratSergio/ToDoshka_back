@@ -2,14 +2,18 @@ import User from "../../models/user.js";
 
 import authSchema from "../../schemas/schemaAuth.js";
 
-import ctrlWrapper from "../../decorators/ctrlWrapper.js";
-
 import BadRequestError from "../../helpers/BadRequestError.js";
 
 import { hashPasswordMiddleware } from "../../helpers/hashPassword.js";
 
 const updateUser = async (req, res, next) => {
   const { _id, email: oldEmail, name: oldName } = req.user;
+
+  if (req.file) {
+    const avatarURL = req.file.path;
+    await User.findByIdAndUpdate(_id, { avatarURL });
+  }
+
   const { value, error } = authSchema.updateSchema.validate(req.body, {
     abortEarly: false,
   });
@@ -51,4 +55,4 @@ const updateUser = async (req, res, next) => {
   }
 };
 
-export default ctrlWrapper(updateUser);
+export default updateUser;
