@@ -1,6 +1,6 @@
 import express from "express";
 
-import theme from "../controllers/auth/theme.js";
+import themeSwap from "../controllers/auth/themeSwap.js";
 
 import login from "../controllers/auth/login.js";
 import logout from "../controllers/auth/logout.js";
@@ -39,7 +39,7 @@ routerAuth.post("/login", login);
 
 routerAuth.post("/logout", isAuthorized, logout);
 
-routerAuth.patch("/theme", isAuthorized, theme);
+routerAuth.patch("/theme", isAuthorized, themeSwap);
 
 routerAuth.put("/update", isAuthorized, upload.single("avatar"), updateUser);
 

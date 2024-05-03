@@ -1,5 +1,6 @@
 import Joi from "joi";
 
+import { themes } from "../constants/uiConstants.js";
 import { name, email, password } from "../constants/regExp.js";
 
 import {
@@ -69,7 +70,16 @@ const updateSchema = Joi.object({
 });
 
 const updateTheme = Joi.object({
-  // write the code here
+  theme: Joi.string()
+    .valid(...themes)
+    .insensitive()
+    .required()
+    .messages({
+      "any.required": fieldRequired("theme"),
+      "any.only": `Theme field must be one of the next value - ${themes.join(
+        ", "
+      )}`,
+    }),
 });
 
 const authSchemas = { loginSchema, registerSchema, updateSchema, updateTheme };
