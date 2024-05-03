@@ -8,7 +8,7 @@ const updateTask = ctrlWrapper(async (req, res) => {
 
   const result = await Task.findByIdAndUpdate(id, req.body, { new: true });
   if (!result) {
-    throw HttpError(404, `Task with id=${id} not found`);
+    throw HttpError(404, `Task ${id} not found`);
   }
   res.json(result);
 });
