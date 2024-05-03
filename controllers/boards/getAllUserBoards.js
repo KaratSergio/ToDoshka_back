@@ -1,4 +1,5 @@
 import ctrlWrapper from "../../decorators/ctrlWrapper.js";
+import Board from "../../models/board.js";
 
 const getAllUserBoards = async (req, res) => {
   const { _id } = req.user;
