@@ -9,7 +9,7 @@ const deleteTask = ctrlWrapper(async (req, res) => {
     
     const resultDelete = await Task.findByIdAndDelete(id);
     if (!resultDelete) {
-      throw HttpError(404, `Task with id=${id} not found`);
+      throw HttpError(404, `Task ${id} not found`);
     }
   
     await Column.findByIdAndUpdate(
@@ -18,7 +18,7 @@ const deleteTask = ctrlWrapper(async (req, res) => {
       { new: true }
     );
   
-    res.status(200).json({ _id: id, message: "Task successfully deleted" });
+    res.status(200).json({ _id: id, message: `Task ${id} successfully deleted` });
   }
 )  
 
