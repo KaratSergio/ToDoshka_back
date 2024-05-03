@@ -19,7 +19,7 @@ const boardSchema = new Schema(
     background: {
       type: String,
       enum: backgrounds,
-      default: "",
+      default: "moon",
     },
     owners: {
       type: Schema.Types.ObjectId,

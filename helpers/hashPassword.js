@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
 
-const hashPassword = async (next) => {
+const hashPassword = async function (next) {
+  if (!this.isModified("password")) return next();
   const salt = await bcrypt.genSalt();
-  const hash = bcrypt.hashSync(this.password, salt);
-  this.password = hash;
+  this.password = await bcrypt.hash(this.password, salt);
   next();
 };
 
