@@ -1,6 +1,6 @@
 export const themes = ["light", "dark", "violet"];
 
-export const priorities = ["without", "low", "medium", "high"];
+export const priorities = ["Without", "Low", "Medium", "High"];
 
 export const icons = [
   "icon-project",

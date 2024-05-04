@@ -5,6 +5,11 @@ import Column from "../../models/column.js";
 
 const updateColumn = ctrlWrapper(async (req, res) => {
   const { id } = req.params;
+  const { body } = req;
+
+  if(!body || Object.keys(body).length === 0) {
+    throw HttpError(400, "Missing field");  
+  }
 
   const result = await Column.findByIdAndUpdate(id, req.body, { new: true });
   if (!result) {
