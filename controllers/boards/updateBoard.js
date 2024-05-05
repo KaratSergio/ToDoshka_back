@@ -4,7 +4,7 @@ import boardSchemas from "../../schemas/schemaBoard.js";
 
 import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 
-import BadRequestError from "../../helpers/BadRequestError.js";
+import BadRequestError from "../../helpers/badRequestError.js";
 
 const updateBoard = async (req, res) => {
   try {

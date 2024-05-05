@@ -9,9 +9,9 @@ import getAllUserBoards from "../controllers/boards/getAllUserBoards.js";
 import addUser from "../controllers/users/addUser.js";
 import removeUser from "../controllers/users/removeUser.js";
 
+import upload from "../middlewares/upload.js";
 import isValidId from "../middlewares/isValidId.js";
 import isAuthorized from "../middlewares/isAuthorized.js";
-import upload from "../middlewares/upload.js";
 
 const routerBoards = express.Router();
 
@@ -25,7 +25,13 @@ routerBoards.patch("/:id/add-user", isAuthorized, addUser);
 
 routerBoards.patch("/:id/remove-user", isAuthorized, removeUser);
 
-routerBoards.put("/:id", isAuthorized,upload.single("background"), isValidId, updateBoard);
+routerBoards.put(
+  "/:id",
+  isAuthorized,
+  upload.single("background"),
+  isValidId,
+  updateBoard
+);
 
 routerBoards.delete("/:id", isAuthorized, isValidId, deleteBoard);
 

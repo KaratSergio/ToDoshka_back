@@ -1,26 +1,36 @@
 import sendEmail from "../../helpers/sendEmail.js";
 
+import ctrlWrapper from "../../decorators/ctrlWrapper.js";
+
+import needHelpSchema from "../../schemas/schemaNeedHelp.js";
+
+import BadRequestError from "../../helpers/badRequestError.js";
+
 const { SUPPORT_EMAIL } = process.env;
 
-export const getNeedHelpEmail = async (req, res) => {
-  const { email, comment } = req.body;
+const helpEmail = async (req, res) => {
+  const { error, value } = needHelpSchema.validate(req.body, {
+    abortEarly: false,
+  });
+  if (error) {
+    throw new BadRequestError(
+      error.details.map((detail) => detail.message).join(", ")
+    );
+  }
+
+  const { email, comment } = value;
 
   const needHelpEmail = {
     to: SUPPORT_EMAIL,
+    from: email,
     subject: "Need help",
     html: `<p>Email: ${email}. <br> Comment: ${comment}</p>`,
   };
 
   await sendEmail(needHelpEmail);
-
-  const helpEmailResponse = {
-    to: email,
-    subject: "Support response",
-    html: `<p>Thank you for your request. We will consider your question in the near future.</p>`,
-  };
-  await sendEmail(helpEmailResponse);
-
   res.status(200).json({
     message: "Send help email successful",
   });
 };
+
+export default ctrlWrapper(helpEmail);

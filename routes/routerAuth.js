@@ -1,7 +1,5 @@
 import express from "express";
 
-import themeSwap from "../controllers/auth/themeSwap.js";
-
 import login from "../controllers/auth/login.js";
 import logout from "../controllers/auth/logout.js";
 import register from "../controllers/auth/register.js";
@@ -12,14 +10,11 @@ import currentUser from "../controllers/users/currentUser.js";
 import googleAuth from "../controllers/auth/googleAuth.js";
 import googleRedirect from "../controllers/auth/googleRedirect.js";
 
+import themeSwap from "../controllers/auth/themeSwap.js";
+import helpEmail from "../controllers/helpEmail/helpEmail.js";
+
 import upload from "../middlewares/upload.js";
 import isAuthorized from "../middlewares/isAuthorized.js";
-
-// import authSchemas from "../schemas/schemaAuth.js";
-
-// import validateBody from "../decorators/validateBody.js";
-
-// const { registerSchema, loginSchema } = authSchemas;
 
 const routerAuth = express.Router();
 
@@ -29,15 +24,13 @@ routerAuth.get("/google-redirect", googleRedirect);
 
 routerAuth.get("/current", isAuthorized, currentUser);
 
-// routerAuth.post("/register", validateBody(registerSchema), register);
-
-// routerAuth.post("/login", validateBody(loginSchema), login);
-
 routerAuth.post("/register", register);
 
 routerAuth.post("/login", login);
 
 routerAuth.post("/logout", isAuthorized, logout);
+
+routerAuth.post("/help", isAuthorized, helpEmail);
 
 routerAuth.patch("/theme", isAuthorized, themeSwap);
 

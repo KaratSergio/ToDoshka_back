@@ -1,14 +1,13 @@
-import HttpError from "../../helpers/HttpError.js";
+import HttpError from "../../helpers/httpError.js";
 import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 import Task from "../../models/task.js";
 import Column from "../../models/column.js";
 
 const addTask = ctrlWrapper(async (req, res) => {
- 
   const { _id: owner } = req.user;
   const { column } = req.body;
 
-  const newTask = await Task.create({...req.body, owner});
+  const newTask = await Task.create({ ...req.body, owner });
   if (!newTask) {
     throw HttpError(404, "Not found");
   }
@@ -28,8 +27,6 @@ const addTask = ctrlWrapper(async (req, res) => {
     priority: newTask.priority,
     deadline: newTask.deadline,
   });
-
 });
 
 export default addTask;
-

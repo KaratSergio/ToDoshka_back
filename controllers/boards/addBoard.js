@@ -2,7 +2,7 @@ import Board from "../../models/board.js";
 
 import boardSchemas from "../../schemas/schemaBoard.js";
 
-import BadRequestError from "../../helpers/BadRequestError.js";
+import BadRequestError from "../../helpers/badRequestError.js";
 
 import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 
