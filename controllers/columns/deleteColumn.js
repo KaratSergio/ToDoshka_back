@@ -1,4 +1,4 @@
-import HttpError from "../../helpers/httpError.js";
+import HttpError from "../../helpers/HttpError.js";
 import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 
 import Board from "../../models/board.js";

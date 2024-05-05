@@ -1,4 +1,4 @@
-import HttpError from "./httpError.js";
+import HttpError from "./HttpError.js";
 
 const BadRequestError = (req, res, next) => {
   const { error } = req.bodyValidation;

@@ -1,6 +1,6 @@
 import User from "../../models/user.js";
 
-import HttpError from "../../helpers/httpError.js";
+import HttpError from "../../helpers/HttpError.js";
 
 import authSchemas from "../../schemas/schemaAuth.js";
 

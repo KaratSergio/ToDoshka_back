@@ -2,7 +2,7 @@ import { Types } from "mongoose";
 
 import Board from "../../models/board.js";
 
-import HttpError from "../../helpers/httpError.js";
+import HttpError from "../../helpers/HttpError.js";
 
 import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 

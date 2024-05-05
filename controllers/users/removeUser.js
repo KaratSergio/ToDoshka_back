@@ -1,6 +1,6 @@
 import BadRequestError from "../../helpers/badRequestError.js";
 import ctrlWrapper from "../../decorators/ctrlWrapper.js";
-import HttpError from "../../helpers/httpError.js";
+import HttpError from "../../helpers/HttpError.js";
 
 import boardSchemas from "../../schemas/schemaBoard.js";
 
