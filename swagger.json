@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "version": "2.0.9",
+    "version": "2.1.0",
     "title": "Swagger ToDoshka ☑",
     "description": "Task Pro 2024 ver.",
     "license": {
@@ -1420,7 +1420,7 @@
             "type": "string",
             "description": "User's email. It must contain only Latin letters; may include numbers, letters in different case",
             "format": "email",
-            "example": "itisher@gmail.com"
+            "example": "Mark@gmail.com"
           },
           "password": {
             "type": "string",
@@ -1440,13 +1440,13 @@
           "name": {
             "type": "string",
             "description": "User's name",
-            "example": "Zorro"
+            "example": "Mark Zukenberg"
           },
           "email": {
             "type": "string",
             "description": "User's email",
             "format": "email",
-            "example": "zorro@gmail.com"
+            "example": "Mark@gmail.com"
           },
           "password": {
             "type": "string",
@@ -1479,12 +1479,12 @@
             "type": "string",
             "description": "User's email.  It must contain only Latin letters; may include numbers, letters in different case",
             "format": "email",
-            "example": "Serafim12@gmail.com"
+            "example": "Mark@gmail.com"
           },
           "password": {
             "type": "string",
             "description": "User's password. It must contain only Latin letters, at least one uppercase, lowercase letter and a number; does not contain a space",
-            "example": "qwertos12378"
+            "example": "qwerty134"
           }
         }
       },
@@ -1503,13 +1503,13 @@
               "name": {
                 "type": "string",
                 "description": "User's name",
-                "example": "Gogi"
+                "example": "Mark Zukenberg"
               },
               "email": {
                 "type": "string",
                 "description": "User's email",
                 "format": "email",
-                "example": "Gogi@gmail.com"
+                "example": "Mark@gmail.com"
               },
               "theme": {
                 "type": "string",
