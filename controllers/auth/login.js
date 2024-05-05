@@ -4,7 +4,7 @@ import HttpError from "../../helpers/HttpError.js";
 
 import authSchemas from "../../schemas/schemaAuth.js";
 
-import BadRequestError from "../../helpers/badRequestError.js";
+import BadRequestError from "../../helpers/BadRequestError.js";
 
 const login = async (req, res, next) => {
   const { value, error } = authSchemas.loginSchema.validate(req.body, {

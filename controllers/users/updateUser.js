@@ -2,7 +2,7 @@ import User from "../../models/user.js";
 
 import authSchema from "../../schemas/schemaAuth.js";
 
-import BadRequestError from "../../helpers/badRequestError.js";
+import BadRequestError from "../../helpers/BadRequestError.js";
 
 import { hashPasswordMiddleware } from "../../helpers/hashPassword.js";
 

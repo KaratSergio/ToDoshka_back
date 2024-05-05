@@ -1,4 +1,4 @@
-import BadRequestError from "../../helpers/badRequestError.js";
+import BadRequestError from "../../helpers/BadRequestError.js";
 import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 import HttpError from "../../helpers/HttpError.js";
 

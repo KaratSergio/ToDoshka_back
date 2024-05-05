@@ -4,7 +4,7 @@ import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 
 import needHelpSchema from "../../schemas/schemaNeedHelp.js";
 
-import BadRequestError from "../../helpers/badRequestError.js";
+import BadRequestError from "../../helpers/BadRequestError.js";
 
 const { SUPPORT_EMAIL } = process.env;
 
