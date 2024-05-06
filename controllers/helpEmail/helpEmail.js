@@ -4,7 +4,7 @@ import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 
 import needHelpSchema from "../../schemas/schemaNeedHelp.js";
 
-import BadRequestError from "../../helpers/BadRequestError.js";
+import HttpError from "../../helpers/HttpError.js";
 
 const { SUPPORT_EMAIL } = process.env;
 
@@ -13,7 +13,8 @@ const helpEmail = async (req, res) => {
     abortEarly: false,
   });
   if (error) {
-    throw new BadRequestError(
+    throw HttpError(
+      400,
       error.details.map((detail) => detail.message).join(", ")
     );
   }
