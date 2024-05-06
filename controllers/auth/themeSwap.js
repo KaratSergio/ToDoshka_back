@@ -1,24 +1,16 @@
 import User from "../../models/user.js";
+import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 
-import authSchema from "../../schemas/schemaAuth.js";
-
-import BadRequestError from "../../helpers/BadRequestError.js";
-
-const themeSwap = async (req, res, next) => {
+const themeSwap = async (req, res) => {
   const { user } = req;
-  const { value, error } = authSchema.updateTheme.validate(req.body, {
-    abortEarly: false,
-  });
-  if (error) {
-    return next(new BadRequestError("Validation failed", error.details));
-  }
+  const { theme } = req.body;
 
   try {
-    await User.findOneAndUpdate({ _id: user._id }, { theme: value.theme });
+    await User.findOneAndUpdate({ _id: user._id }, { theme });
     res.json({ message: "Theme changed successfully" });
   } catch (err) {
-    next(err);
+    throw err;
   }
 };
 
-export default themeSwap;
+export default ctrlWrapper(themeSwap);

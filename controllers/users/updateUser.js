@@ -1,12 +1,8 @@
 import User from "../../models/user.js";
-
-import authSchema from "../../schemas/schemaAuth.js";
-
-import BadRequestError from "../../helpers/BadRequestError.js";
-
+import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 import { hashPasswordMiddleware } from "../../helpers/hashPassword.js";
 
-const updateUser = async (req, res, next) => {
+const updateUser = async (req, res) => {
   const { _id, email: oldEmail, name: oldName } = req.user;
 
   if (req.file) {
@@ -14,24 +10,12 @@ const updateUser = async (req, res, next) => {
     await User.findByIdAndUpdate(_id, { avatarURL });
   }
 
-  const { value, error } = authSchema.updateSchema.validate(req.body, {
-    abortEarly: false,
-  });
-
-  if (error) {
-    return next(new BadRequestError("Validation failed", error.details));
-  }
-
-  const { name = oldName, email = oldEmail, password } = value;
+  const { name = oldName, email = oldEmail, password } = req.body;
   const updatedUser = { name };
 
   if (password) {
-    try {
-      updatedUser.password = await hashPasswordMiddleware(password);
-      updatedUser.accessToken = "";
-    } catch (err) {
-      return next(new BadRequestError("Password hashing failed", err));
-    }
+    updatedUser.password = await hashPasswordMiddleware(password);
+    updatedUser.accessToken = "";
   }
 
   if (email && email !== oldEmail) {
@@ -39,20 +23,16 @@ const updateUser = async (req, res, next) => {
     updatedUser.accessToken = "";
   }
 
-  try {
-    const result = await User.findByIdAndUpdate(_id, updatedUser, {
-      new: true,
-      select: "name email theme avatarURL -_id",
-    });
+  const result = await User.findByIdAndUpdate(_id, updatedUser, {
+    new: true,
+    select: "name email theme avatarURL -_id",
+  });
 
-    if (!result) {
-      return next(new BadRequestError("User not found"));
-    }
-
-    res.status(200).json(result);
-  } catch (err) {
-    next(new BadRequestError("Failed to update user", err));
+  if (!result) {
+    return next(new BadRequestError("User not found"));
   }
+
+  res.status(200).json(result);
 };
 
-export default updateUser;
+export default ctrlWrapper(updateUser);

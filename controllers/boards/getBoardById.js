@@ -1,9 +1,6 @@
 import { Types } from "mongoose";
-
 import Board from "../../models/board.js";
-
 import HttpError from "../../helpers/HttpError.js";
-
 import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 
 const getBoardById = async (req, res) => {

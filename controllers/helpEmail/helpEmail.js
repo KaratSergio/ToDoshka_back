@@ -1,25 +1,10 @@
 import sendEmail from "../../helpers/sendEmail.js";
-
 import ctrlWrapper from "../../decorators/ctrlWrapper.js";
-
-import needHelpSchema from "../../schemas/schemaNeedHelp.js";
-
-import HttpError from "../../helpers/HttpError.js";
 
 const { SUPPORT_EMAIL } = process.env;
 
 const helpEmail = async (req, res) => {
-  const { error, value } = needHelpSchema.validate(req.body, {
-    abortEarly: false,
-  });
-  if (error) {
-    throw HttpError(
-      400,
-      error.details.map((detail) => detail.message).join(", ")
-    );
-  }
-
-  const { email, comment } = value;
+  const { email, comment } = req.body;
 
   const needHelpEmail = {
     to: SUPPORT_EMAIL,

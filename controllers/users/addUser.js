@@ -1,33 +1,33 @@
-import BadRequestError from "../../helpers/BadRequestError.js";
-import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 import HttpError from "../../helpers/HttpError.js";
-
-import boardSchemas from "../../schemas/schemaBoard.js";
+import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 
 import Board from "../../models/board.js";
 import User from "../../models/user.js";
 
 const addUser = async (req, res) => {
-  const { value, error } = boardSchemas.ownersSchema.validate(req.body, {
-    abortEarly: false,
-  });
-  if (error) BadRequestError(error);
-  const { email } = value;
+  const { email } = req.body;
   const { id } = req.params;
 
   const user = await User.findOne({ email });
-  if (!user) throw HttpError(400, "User does not exist");
+  if (!user) {
+    throw HttpError(400, "User does not exist");
+  }
 
   const board = await Board.findById(id);
+  if (!board) {
+    throw HttpError(404, "Board not found");
+  }
   if (board.owners.includes(user._id)) {
     throw HttpError(
       409,
-      `User ${user.email} is already working with board ${id}`
+      `User ${user.email} is already an owner of board ${id}`
     );
   }
+
   await Board.findByIdAndUpdate(id, { $push: { owners: user._id } });
+
   res.json({
-    message: `User ${user.email} has successfully connected to board ${id}`,
+    message: `User ${user.email} has successfully been added as an owner to board ${id}`,
   });
 };
 

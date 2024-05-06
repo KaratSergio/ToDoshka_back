@@ -1,24 +1,13 @@
 import User from "../../models/user.js";
-
 import HttpError from "../../helpers/HttpError.js";
+import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 
-import authSchema from "../../schemas/schemaAuth.js";
-
-import BadRequestError from "../../helpers/BadRequestError.js";
-
-const register = async (req, res, next) => {
-  const { value, error } = authSchema.registerSchema.validate(req.body, {
-    abortEarly: false,
-  });
-
-  if (error) {
-    return next(new BadRequestError("Validation failed", error.details));
-  }
-  const { name, email, password } = value;
+const register = async (req, res) => {
+  const { name, email, password } = req.body;
 
   const userEmail = await User.findOne({ email });
   if (userEmail) {
-    throw new HttpError(409, "Email is already in use");
+    throw HttpError(409, "Email is already in use");
   }
 
   const newUser = await User.create({ name, email, password });
@@ -36,4 +25,4 @@ const register = async (req, res, next) => {
   });
 };
 
-export default register;
+export default ctrlWrapper(register);
