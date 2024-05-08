@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import mongoose from "mongoose";
 
 import handleMongooseError from "../helpers/handleMongooseError.js";
 
@@ -21,10 +22,12 @@ const boardSchema = new Schema(
       enum: backgrounds,
       default: "moon",
     },
-    owners: {
-      type: Schema.Types.ObjectId,
-      ref: "user",
-    },
+    owners: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
     columns: {
       type: Schema.Types.ObjectId,
       ref: "column",

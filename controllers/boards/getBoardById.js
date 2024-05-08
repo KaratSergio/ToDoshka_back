@@ -1,11 +1,11 @@
-import { Types } from "mongoose";
+import mongoose from "mongoose";
 import Board from "../../models/board.js";
 import HttpError from "../../helpers/HttpError.js";
 import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 
 const getBoardById = async (req, res) => {
   const { id } = req.params;
-  const objectId = Types.ObjectId(id);
+  const objectId = new mongoose.Types.ObjectId(id);
 
   const result = await Board.aggregate([
     { $match: { _id: objectId } },
@@ -20,11 +20,8 @@ const getBoardById = async (req, res) => {
     {
       $lookup: {
         from: "users",
-        let: { owners: "$owners" },
-        pipeline: [
-          { $match: { $expr: { $in: ["$_id", "$$owners"] } } },
-          { $project: { _id: 0, avatarURL: 1, name: 1, email: 1 } },
-        ],
+        localField: "owners",
+        foreignField: "_id",
         as: "owners",
       },
     },
