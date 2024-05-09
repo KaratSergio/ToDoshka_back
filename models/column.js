@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 import handleMongooseError from "../helpers/handleMongooseError.js";
 
@@ -18,10 +18,12 @@ const columnSchema = new Schema(
       ref: "board",
       required: "true",
     },
-    tasks: {
-      type: Schema.Types.ObjectId,
-      ref: "task",
-    },
+    tasks: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "task",
+      },
+    ],
   },
   { versionKey: false, timestamps: true }
 );

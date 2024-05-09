@@ -1,5 +1,4 @@
-import { Schema, model } from "mongoose";
-import mongoose from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 import handleMongooseError from "../helpers/handleMongooseError.js";
 
@@ -28,10 +27,12 @@ const boardSchema = new Schema(
         ref: "User",
       },
     ],
-    columns: {
-      type: Schema.Types.ObjectId,
-      ref: "column",
-    },
+    columns: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "column",
+      },
+    ],
   },
   { versionKey: false, timestamps: false }
 );
