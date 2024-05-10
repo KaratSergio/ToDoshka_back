@@ -12,7 +12,7 @@ const deleteBoard = async (req, res) => {
     throw HttpError(404, `Board ${id} not found`);
   }
 
-  if (result.columnOrder.length !== 0) {
+  if (result.columnOrder && result.columnOrder.length !== 0) {
     result.columnOrder.forEach(async (columnId) => {
       const { taskOrder } = await Column.findByIdAndDelete(columnId);
       if (taskOrder && taskOrder.length !== 0) {
