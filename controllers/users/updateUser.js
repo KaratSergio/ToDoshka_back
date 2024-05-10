@@ -15,12 +15,12 @@ const updateUser = async (req, res) => {
 
   if (password) {
     updatedUser.password = await hashPasswordMiddleware(password);
-    updatedUser.accessToken = "";
+    // updatedUser.accessToken = "";
   }
 
   if (email && email !== oldEmail) {
     updatedUser.email = email;
-    updatedUser.accessToken = "";
+    // updatedUser.accessToken = "";
   }
 
   const result = await User.findByIdAndUpdate(_id, updatedUser, {
