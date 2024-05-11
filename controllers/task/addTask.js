@@ -26,6 +26,7 @@ const addTask = ctrlWrapper(async (req, res) => {
     description: newTask.description,
     priority: newTask.priority,
     deadline: newTask.deadline,
+    column: newTask.column,
   });
 });
 
