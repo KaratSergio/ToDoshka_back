@@ -25,7 +25,7 @@ const columnSchema = new Schema(
       },
     ],
   },
-  { versionKey: false, timestamps: true }
+  { versionKey: false, timestamps: false }
 );
 
 columnSchema.post("save", handleMongooseError);

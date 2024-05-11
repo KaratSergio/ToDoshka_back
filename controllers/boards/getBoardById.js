@@ -18,12 +18,7 @@ const getBoardById = async (req, res) => {
       },
     },
     {
-      $lookup: {
-        from: "users",
-        localField: "owners",
-        foreignField: "_id",
-        as: "owners",
-      },
+      $unwind: "$columns",
     },
     {
       $lookup: {
@@ -35,9 +30,25 @@ const getBoardById = async (req, res) => {
     },
     {
       $addFields: {
-        "columns.tasks": {
-          $ifNull: ["$columns.tasks", []],
-        },
+        "columns.tasks": { $ifNull: ["$columns.tasks", []] },
+      },
+    },
+    {
+      $group: {
+        _id: "$_id",
+        title: { $first: "$title" },
+        icon: { $first: "$icon" },
+        background: { $first: "$background" },
+        owners: { $first: "$owners" },
+        columns: { $push: "$columns" },
+      },
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField: "owners",
+        foreignField: "_id",
+        as: "owners",
       },
     },
   ]);
@@ -45,6 +56,11 @@ const getBoardById = async (req, res) => {
   if (result.length === 0) {
     throw HttpError(404, `Board ${id} not found`);
   }
+
+  if (result.length > 1) {
+    throw new Error("Multiple boards found for the same ID");
+  }
+
   res.json(result[0]);
 };
 
