@@ -14,6 +14,7 @@ export const icons = [
 ];
 
 export const backgrounds = [
+  "default",
   "air",
   "ballons",
   "canyon",
