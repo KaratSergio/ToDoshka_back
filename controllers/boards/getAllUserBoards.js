@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 
 const getAllUserBoards = async (req, res) => {
   const { _id } = req.user;
+
   const result = await Board.aggregate([
     {
       $match: { owners: new mongoose.Types.ObjectId(_id) },

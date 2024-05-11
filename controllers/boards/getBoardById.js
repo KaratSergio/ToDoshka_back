@@ -5,7 +5,12 @@ import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 
 const getBoardById = async (req, res) => {
   const { id } = req.params;
+
+  console.log("Received board ID:", id);
+
   const objectId = new mongoose.Types.ObjectId(id);
+
+  console.log("Converted to ObjectId:", objectId);
 
   const result = await Board.aggregate([
     { $match: { _id: objectId } },
@@ -18,7 +23,10 @@ const getBoardById = async (req, res) => {
       },
     },
     {
-      $unwind: "$columns",
+      $unwind: {
+        path: "$columns",
+        preserveNullAndEmptyArrays: true,
+      },
     },
     {
       $lookup: {
@@ -57,9 +65,9 @@ const getBoardById = async (req, res) => {
     throw HttpError(404, `Board ${id} not found`);
   }
 
-  if (result.length > 1) {
-    throw new Error("Multiple boards found for the same ID");
-  }
+  // if (result.length > 1) {
+  //   throw new Error("Multiple boards found for the same ID");
+  // }
 
   res.json(result[0]);
 };
