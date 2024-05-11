@@ -20,6 +20,7 @@ const getAllUserBoards = async (req, res) => {
     {
       $project: {
         _id: 1,
+        icon: 1,
         title: 1,
         owners: {
           $map: {

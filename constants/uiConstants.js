@@ -28,4 +28,5 @@ export const backgrounds = [
   "sea",
   "tree",
   "yacht",
+  "stars",
 ];
