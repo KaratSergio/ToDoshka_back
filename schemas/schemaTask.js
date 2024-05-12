@@ -8,14 +8,14 @@ const addTaskSchema = Joi.object({
   description: Joi.string().required(),
   column: Joi.objectId().required(),
   priority: Joi.string().valid("Without", "Low", "Medium", "High"),
-  deadline: Joi.date(),
+  deadline: Joi.string(),
 });
 
 const editTaskSchema = Joi.object({
   title: Joi.string(),
   description: Joi.string(),
   priority: Joi.string().valid("Without", "Low", "Medium", "High"),
-  deadline: Joi.date(),
+  deadline: Joi.string(),
 });
 
 const taskSchemas = { addTaskSchema, editTaskSchema };

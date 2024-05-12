@@ -21,8 +21,8 @@ const taskSchema = new Schema(
       default: "Without priority",
     },
     deadline: {
-      type: Date,
-      default: Date.now,
+      type: String,
+      default: "",
     },
     owner: {
       type: Schema.Types.ObjectId,
