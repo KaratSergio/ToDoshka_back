@@ -18,7 +18,11 @@ const deleteTask = ctrlWrapper(async (req, res) => {
     { new: true }
   );
 
-  res.status(200).json({ _id: id, message: `Task ${id} successfully deleted` });
+  res.status(200).json({
+    _id: id,
+    column_id: resultDelete.column,
+    message: `Task ${id} successfully deleted`,
+  });
 });
 
 export default deleteTask;
