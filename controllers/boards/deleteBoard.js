@@ -13,12 +13,14 @@ const deleteBoard = async (req, res) => {
   }
 
   if (result.columnOrder && result.columnOrder.length !== 0) {
-    result.columnOrder.forEach(async (columnId) => {
-      const { taskOrder } = await Column.findByIdAndDelete(columnId);
-      if (taskOrder && taskOrder.length !== 0) {
-        await Task.deleteMany({ _id: { $in: taskOrder } });
-      }
-    });
+    await Promise.all(
+      result.columnOrder.map(async (columnId) => {
+        const { taskOrder } = await Column.findByIdAndDelete(columnId);
+        if (taskOrder && taskOrder.length !== 0) {
+          await Task.deleteMany({ _id: { $in: taskOrder } });
+        }
+      })
+    );
   }
   res.status(200).json({
     message: `Board ${id} deleted successfully`,

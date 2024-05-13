@@ -19,7 +19,7 @@ const loginSchema = Joi.object({
       "string.pattern.base": emailInvalid,
     }),
   password: Joi.string()
-    .min(6)
+    .min(8)
     .max(64)
     .pattern(password)
     .required()
@@ -47,7 +47,7 @@ const registerSchema = Joi.object({
       "string.pattern.base": emailInvalid,
     }),
   password: Joi.string()
-    .min(6)
+    .min(8)
     .max(64)
     .pattern(password)
     .required()
@@ -61,10 +61,10 @@ const updateSchema = Joi.object({
   name: Joi.string().min(2).max(32).pattern(name).messages({
     "string.pattern.base": nameInvalid,
   }),
-  email: Joi.string().min(2).max(32).pattern(email).messages({
+  email: Joi.string().pattern(email).messages({
     "string.pattern.base": emailInvalid,
   }),
-  password: Joi.string().min(2).max(32).pattern(password).allow(null).messages({
+  password: Joi.string().min(8).max(64).pattern(password).allow(null).messages({
     "string.pattern.base": passwordInvalid,
   }),
 });

@@ -7,12 +7,12 @@ const login = async (req, res) => {
 
   const user = await User.findOne({ email });
   if (!user) {
-    throw HttpError(401, "Email is wrong");
+    throw HttpError(401, "Something is wrong");
   }
 
   const passwordMatch = await user.comparePassword(password);
   if (!passwordMatch) {
-    throw HttpError(401, "Password is wrong");
+    throw HttpError(401, "Something is wrong");
   }
 
   const accessToken = user.tokenAuth();

@@ -7,7 +7,7 @@ const getAllUserBoards = async (req, res) => {
 
   const result = await Board.aggregate([
     {
-      $match: { owners: new mongoose.Types.ObjectId(_id) },
+      $match: { owners: _id },
     },
     {
       $lookup: {

@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "version": "2.1.0",
+    "version": "2.1.1",
     "title": "Swagger ToDoshka ☑",
     "description": "Task Pro 2024 ver.",
     "license": {
@@ -1432,42 +1432,37 @@
       "RegistrationResponse": {
         "type": "object",
         "properties": {
-          "_id": {
-            "type": "string",
-            "description": "User's id",
-            "example": "3214d232436cf45474"
-          },
-          "name": {
-            "type": "string",
-            "description": "User's name",
-            "example": "Mark Zukenberg"
-          },
-          "email": {
-            "type": "string",
-            "description": "User's email",
-            "format": "email",
-            "example": "Mark@gmail.com"
-          },
-          "password": {
-            "type": "string",
-            "description": "User's password",
-            "example": "$2b$10$fNwXWuOdimNwjq1RdYCgUuCQfBvOGxxOqYqVta.A81EFBdBxOxk.m"
-          },
-          "theme": {
-            "type": "string",
-            "description": "User's theme",
-            "enum": ["dark", "violet", "light"],
-            "example": "dark"
-          },
-          "avatarURL": {
-            "type": "string",
-            "description": "User's avatar",
-            "example": ""
-          },
           "accessToken": {
             "type": "string",
-            "description": "User's token",
-            "example": null
+            "description": "User's accessToken",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDBiYjI1NTUzNWNjNzRjZmY5ZmJmNyIsImlhdCI6MTcxNTYxNDA4MywiZXhwIjoxNzE4MjA2MDgzfQ.9buJ5nCkywHhSiA7fooZm6WhK8XFEGqx_TXzBW8HcUA"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "User's name",
+                "example": "Mark Zuckerberg"
+              },
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email",
+                "example": "mark@gmail.com"
+              },
+              "theme": {
+                "type": "string",
+                "description": "User's theme",
+                "enum": ["dark", "violet", "light"],
+                "example": "dark"
+              },
+              "avatarURL": {
+                "type": "string",
+                "description": "User's avatar URL",
+                "example": ""
+              }
+            }
           }
         }
       },
@@ -1693,54 +1688,28 @@
               ],
               "example": "icon-hexagon"
             },
-            "background": {
-              "type": "string",
-              "description": "Board's background",
-              "enum": [
-                "air",
-                "ballons",
-                "canyon",
-                "circle",
-                "clouds",
-                "magnolia",
-                "milkyway",
-                "moon",
-                "night",
-                "palm",
-                "rocks",
-                "sea",
-                "tree",
-                "yacht"
-              ],
-              "example": "clouds"
-            },
-            "column": {
+            "owners": {
               "type": "array",
-              "description": "Column order",
-              "example": [
-                "64d5585cf10982f0832226f4",
-                "64d5585cf10982f0832226f4"
-              ]
-            },
-            "owner": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "User's name",
-                  "example": "Rokko"
-                },
-                "email": {
-                  "type": "string",
-                  "description": "User's email",
-                  "format": "email",
-                  "example": "rokko@gmail.com"
-                },
-
-                "avatarURL": {
-                  "type": "string",
-                  "description": "User's avatar",
-                  "example": ""
+              "description": "List of board owners",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "User's name",
+                    "example": "Rokko"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "User's email",
+                    "format": "email",
+                    "example": "rokko@gmail.com"
+                  },
+                  "avatarURL": {
+                    "type": "string",
+                    "description": "User's avatar",
+                    "example": ""
+                  }
                 }
               }
             }
@@ -1753,7 +1722,7 @@
           "_id": {
             "type": "string",
             "description": "Board id",
-            "example": "64d360ea78fe376e4981199f"
+            "example": "66423d33382481f11004701e"
           },
           "title": {
             "type": "string",
@@ -1794,84 +1763,95 @@
               "tree",
               "yacht"
             ],
-            "example": "clouds"
+            "example": "sea"
           },
-          "column": {
+          "owners": {
             "type": "array",
-            "description": "Column order",
-            "example": ["64d52e77846f3f325f35b8f0"]
-          },
-          "owner": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "User's name",
-                "example": "Nafanya"
-              },
-              "email": {
-                "type": "string",
-                "description": "User's email",
-                "format": "email",
-                "example": "Nafanya@gmail.com"
-              },
-              "avatarURL": {
-                "type": "string",
-                "description": "User's avatar",
-                "example": ""
+            "description": "List of board owners",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "Owner's id",
+                  "example": "66423ccb382481f110047007"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "User's name",
+                  "example": "Mark Zukenberg"
+                },
+                "password": {
+                  "type": "string",
+                  "description": "User's password",
+                  "example": "$2b$10$p28FRLHf.L6CFwbnfgEPQuZJufJP98Xl3J0Y0FW0vGH6zyftaQBhK"
+                },
+                "email": {
+                  "type": "string",
+                  "description": "User's email",
+                  "format": "email",
+                  "example": "Mark@gmail.com"
+                },
+                "theme": {
+                  "type": "string",
+                  "description": "User's theme",
+                  "enum": ["dark", "violet", "light"],
+                  "example": "dark"
+                },
+                "avatarURL": {
+                  "type": "string",
+                  "description": "User's avatar",
+                  "example": ""
+                },
+                "accessToken": {
+                  "type": "string",
+                  "description": "User's access token",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDIzY2NiMzgyNDgxZjExMDA0NzAwNyIsImlhdCI6MTcxNTYxNjk3MSwiZXhwIjoxNzE4MjA4OTcxfQ.Yi36muln_sEoz3dodfgrLvEj9Guu99mPZ-XvB653dno"
+                }
               }
             }
           },
           "columns": {
             "type": "array",
             "description": "Columns",
-            "example": [
-              {
-                "_id": "64d5585cf10982f0832226f4",
-                "title": "title board",
-                "board": "64d52e77846f3f325f35b8f0",
-                "taskOrder": [
-                  "64d8907409b4e55ec6255990",
-                  "64d8907809b4e55ec6255994",
-                  "64d8901109b4e55ec6255983",
-                  "64d88e0d09b4e55ec625596c"
-                ],
-                "tasks": [
-                  {
-                    "_id": "64d8901109b4e55ec6255983",
-                    "title": "Task 1",
-                    "description": "This is the description of task 1",
-                    "priority": "without",
-                    "deadline": null,
-                    "column": "64d5585cf10982f0832226f4"
-                  },
-                  {
-                    "_id": "64d8907409b4e55ec6255990",
-                    "title": "Task 2",
-                    "description": "This is the description of task 2",
-                    "priority": "low",
-                    "deadline": "21/12/2022",
-                    "column": "64d5585cf10982f0832226f4"
-                  },
-                  {
-                    "_id": "64d88e0d09b4e55ec625596c",
-                    "title": "Task 3",
-                    "description": "This is the description of task 3",
-                    "priority": "medium",
-                    "deadline": "13/04/2023",
-                    "column": "64d5585cf10982f0832226f4"
-                  },
-                  {
-                    "_id": "64d8907809b4e55ec6255994",
-                    "title": "Task 4",
-                    "description": "This is the description of task 4",
-                    "priority": "high",
-                    "deadline": null,
-                    "column": "64d5585cf10982f0832226f4"
+            "items": {
+              "type": "object",
+              "properties": {
+                "tasks": {
+                  "type": "array",
+                  "description": "Tasks in the column",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "description": "Task id"
+                      },
+                      "title": {
+                        "type": "string",
+                        "description": "Task's title"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Task's description"
+                      },
+                      "priority": {
+                        "type": "string",
+                        "description": "Task's priority"
+                      },
+                      "deadline": {
+                        "type": "string",
+                        "description": "Task's deadline"
+                      },
+                      "column": {
+                        "type": "string",
+                        "description": "Column id"
+                      }
+                    }
                   }
-                ]
+                }
               }
-            ]
+            }
           }
         }
       },
@@ -1925,11 +1905,6 @@
       "AddBoardResponse": {
         "type": "object",
         "properties": {
-          "_id": {
-            "type": "string",
-            "description": "Board id",
-            "example": "64d360ea78fe376e4981199f"
-          },
           "title": {
             "type": "string",
             "description": "Board's title",
@@ -1945,14 +1920,24 @@
             "description": "Board's background",
             "example": "sea"
           },
+          "owners": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "User's ID who owns the board",
+              "example": "64d360ea78fe376e4981199f"
+            },
+            "description": "List of users who own the board",
+            "example": ["64d360ea78fe376e4981199f"]
+          },
           "column": {
             "type": "array",
             "description": "Column order",
             "example": []
           },
-          "owner_id": {
+          "_id": {
             "type": "string",
-            "description": "Owner`s id",
+            "description": "Board id",
             "example": "64d11ad3b31bb700519dad42"
           }
         }
