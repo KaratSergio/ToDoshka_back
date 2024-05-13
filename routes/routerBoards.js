@@ -24,9 +24,9 @@ routerBoards.get("/:id", isAuthorized, isValidId, getBoardById);
 // prettier-ignore
 routerBoards.post("/", isAuthorized, validateBody(boardSchemas.addBoardSchema), addBoard);
 // prettier-ignore
-routerBoards.patch("/:id/add-user", isAuthorized, validateBody(boardSchemas.ownersSchema), addUser);
+routerBoards.patch("/:id/add-user", isAuthorized, addUser);
 // prettier-ignore
-routerBoards.patch("/:id/remove-user", isAuthorized, validateBody(boardSchemas.ownersSchema), removeUser);
+routerBoards.patch("/:id/remove-user", isAuthorized, removeUser);
 // prettier-ignore
 routerBoards.put("/:id", isAuthorized, upload.single("background"), isValidId, validateBody(boardSchemas.editBoardSchema), updateBoard);
 

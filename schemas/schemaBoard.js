@@ -16,16 +16,6 @@ const editBoardSchema = Joi.object({
   background: Joi.string().valid(...backgrounds),
 });
 
-const ownersSchema = Joi.object({
-  email: Joi.string()
-    .pattern(email)
-    .required()
-    .messages({
-      "any.required": fieldRequired("email"),
-      "string.pattern.base": emailInvalid,
-    }),
-});
-
-const boardSchemas = { addBoardSchema, editBoardSchema, ownersSchema };
+const boardSchemas = { addBoardSchema, editBoardSchema };
 
 export default boardSchemas;

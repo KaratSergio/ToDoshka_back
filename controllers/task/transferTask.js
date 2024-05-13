@@ -2,13 +2,13 @@ import { Types } from "mongoose";
 
 import Task from "../../models/task.js";
 import Column from "../../models/column.js";
+import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 
 const transferTask = async (req, res) => {
   const { id } = req.params;
   const { source, destination } = req.body;
 
   const taskId = new Types.ObjectId(id);
-  //   const columnId = new Types.ObjectId(destination.columnId);
 
   await Column.findByIdAndUpdate(source.transferId, {
     $pull: { tasks: taskId },
@@ -28,4 +28,4 @@ const transferTask = async (req, res) => {
   });
 };
 
-export default transferTask;
+export default ctrlWrapper(transferTask);

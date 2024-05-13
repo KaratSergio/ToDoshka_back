@@ -17,14 +17,14 @@ const addUser = async (req, res) => {
   if (!board) {
     throw HttpError(404, "Board not found");
   }
-  if (board.owners.includes(user._id)) {
+  if (board.assignees.includes(user._id)) {
     throw HttpError(
       409,
       `User ${user.email} is already an owner of board ${id}`
     );
   }
 
-  await Board.findByIdAndUpdate(id, { $push: { owners: user._id } });
+  await Board.findByIdAndUpdate(id, { $push: { assignees: user._id } });
 
   res.json({
     message: `User ${user.email} has successfully been added as an owner to board ${id}`,

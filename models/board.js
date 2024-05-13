@@ -21,7 +21,7 @@ const boardSchema = new Schema(
       enum: backgrounds,
       default: null,
     },
-    owners: [
+    assignees: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",

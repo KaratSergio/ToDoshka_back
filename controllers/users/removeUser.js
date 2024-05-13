@@ -17,17 +17,17 @@ const removeUser = async (req, res) => {
   if (!board) {
     throw HttpError(404, "Board not found");
   }
-  if (!board.owners.includes(user._id)) {
+  if (!board.assignees.includes(user._id)) {
     throw HttpError(400, `User ${user.email} is not an owner of board ${id}`);
   }
-  if (board.owners.length < 2) {
+  if (board.assignees.length < 2) {
     throw HttpError(
       409,
       `User ${user.email} is the only owner of the board ${id}. It's preferable to delete the board instead.`
     );
   }
 
-  await Board.findByIdAndUpdate(id, { $pull: { owners: user._id } });
+  await Board.findByIdAndUpdate(id, { $pull: { assignees: user._id } });
 
   res.json({
     message: `User ${user.email} has successfully been removed from board ${id}`,
