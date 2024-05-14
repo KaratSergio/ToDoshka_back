@@ -18,7 +18,7 @@ const deleteColumn = ctrlWrapper(async (req, res) => {
     throw HttpError(404, `Board for column with id=${id} not found`);
   }
 
-  const isOwner = board.owners.some((ownerId) => ownerId.equals(user._id));
+  const isOwner = board.assignees.some((ownerId) => ownerId.equals(user._id));
   if (!isOwner) {
     throw HttpError(403, `You are not authorized to delete this column`);
   }
