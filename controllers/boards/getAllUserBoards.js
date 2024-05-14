@@ -1,20 +1,19 @@
 import ctrlWrapper from "../../decorators/ctrlWrapper.js";
 import Board from "../../models/board.js";
-import mongoose from "mongoose";
 
 const getAllUserBoards = async (req, res) => {
   const { _id } = req.user;
 
   const result = await Board.aggregate([
     {
-      $match: { owners: _id },
+      $match: { assignees: _id },
     },
     {
       $lookup: {
         from: "users",
-        localField: "owners",
+        localField: "assignees",
         foreignField: "_id",
-        as: "owners",
+        as: "assignees",
       },
     },
     {
@@ -22,9 +21,9 @@ const getAllUserBoards = async (req, res) => {
         _id: 1,
         icon: 1,
         title: 1,
-        owners: {
+        assignees: {
           $map: {
-            input: "$owners",
+            input: "$assignees",
             as: "owner",
             in: {
               avatarURL: "$$owner.avatarURL",

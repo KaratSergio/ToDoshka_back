@@ -47,14 +47,14 @@ const getBoardById = async (req, res) => {
         title: { $first: "$title" },
         icon: { $first: "$icon" },
         background: { $first: "$background" },
-        owners: { $first: "$owners" },
+        assignees: { $first: "$assignees" },
         columns: { $push: "$columns" },
       },
     },
     {
       $lookup: {
         from: "users",
-        localField: "owners",
+        localField: "assignees",
         foreignField: "_id",
         as: "owners",
       },
