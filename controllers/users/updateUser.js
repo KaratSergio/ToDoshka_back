@@ -23,7 +23,7 @@ const updateUser = async (req, res) => {
 
   const result = await User.findByIdAndUpdate(_id, updatedUser, {
     new: true,
-    select: "name email theme avatarURL -_id",
+    select: "name email theme avatarURL _id",
   });
 
   if (!result) {
