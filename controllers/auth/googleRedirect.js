@@ -18,7 +18,7 @@ const googleRedirect = async (req, res) => {
   const code = urlParams.code;
   const serverHOST = req.get("host") === "localhost:3000" ? BASE_URL : HOST_URL;
   const frontendHOST =
-    req.get("host") === "localhost:3000"
+    req.get("host") === "localhost:5173"
       ? LOCAL_FRONTEND_LOGIN_PAGE
       : HOST_FRONTEND_LOGIN_PAGE;
 
@@ -46,7 +46,7 @@ const googleRedirect = async (req, res) => {
   if (!user) {
     const result = await User.create({ name, email, password: id });
 
-    const accessToken = result.signToken();
+    const accessToken = result.tokenAuth();
     await User.findOneAndUpdate({ email }, { accessToken });
 
     return res.redirect(
@@ -55,7 +55,7 @@ const googleRedirect = async (req, res) => {
   }
 
   if (user) {
-    const accessToken = user.signToken();
+    const accessToken = user.tokenAuth();
     await User.findOneAndUpdate({ email }, { accessToken });
     return res.redirect(
       `${frontendHOST}/${accessToken}?name=${user.name}&email=${user.email}&theme=${user.theme}&avatarURL=${user.avatarURL}`
